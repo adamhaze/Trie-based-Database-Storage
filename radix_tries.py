@@ -30,6 +30,7 @@ class RadixTrie():
     #initalize with empty root node
     def __init__(self):
         self.root = Node()
+        self.name = 'radix_trie'
 
     #checks if a node's children shares a prefix with the remainig portion of the search string
     def comparePrefix(self, prefix, remStr):
@@ -79,7 +80,7 @@ class RadixTrie():
                 return self.lookupHelper(searchNode, str, currStr, remStr)
 
     #check if string exists 
-    def lookup(self, str):
+    def query(self, str):
         return self.lookupHelper(self.root, str, "", str)
     
     def insertHelper(self, node, word):
