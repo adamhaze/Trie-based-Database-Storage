@@ -14,6 +14,7 @@ class TrieTree:
         
         self.root = TrieNode("")
         self.nodeCount = 1
+        self.name = 'basic_trie'
         
     def insert(self, word):
         
@@ -42,22 +43,6 @@ class TrieTree:
                 # word not found
                 print("{} was NOT found in the Trie Tree".format(word))
                 
-        print("Successful search for {}".format(word))
-        print(queryArr)
+        # print("Successful search for {}".format(word))
+        # print(queryArr)
         
-        
-        
-        
-
-
-words = ["apple", "apply", "application"]
-trie = TrieTree()
-
-for word in words:
-    trie.insert(word)
-    
-trie.query("application")
-print("Number of nodes: {}".format(trie.nodeCount))
-
-            
-                
