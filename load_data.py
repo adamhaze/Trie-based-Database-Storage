@@ -1,4 +1,4 @@
-
+import csv
 import re
 
 filename = 'war_and_peace_tolstoy.txt'
@@ -12,4 +12,12 @@ with open(filename, 'r') as file:
 	data = list(filter(('').__ne__, data))  # remove all empty strings from list
 file.close()
 
-print(data)
+
+with open('input_data.csv', 'w') as words_file:
+    wr = csv.writer(words_file)
+    # wr.writerows([data])
+    for word in data:
+        wr.writerow([word])
+    
+words_file.close()
+# print(data)
