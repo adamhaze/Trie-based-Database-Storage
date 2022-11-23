@@ -2,6 +2,7 @@ import numpy as np
 from random import shuffle
 import time
 import csv
+import os
 from TrieTree import *
 
 # number between 0 and 1
@@ -31,7 +32,7 @@ class MetricCollector:
             self.data = self.data.split('\n')
         file.close()
         # shuffle(self.data, shuffle_seed)
-        print(len(self.data))
+        # print(len(self.data))
         
     def log_node_count(self):
         self.node_cnt.append(self.DS.nodeCount)
@@ -67,6 +68,7 @@ class MetricCollector:
                     wr.writerow([elem])
             results.close()
                     
+        if not os.path.exists('results'): os.makedirs('results')
                 
         save_file_nodecnt = 'results/{}_node_count.csv'.format(self.name)
         save_file_instime = 'results/{}_insert_time.csv'.format(self.name)
