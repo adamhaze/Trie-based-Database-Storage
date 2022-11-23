@@ -21,7 +21,7 @@ class Node():
     def getChild(self, child):
         #return the node corresponding to the child being looked for
         if child in self.children:
-            return self.children[child] 
+            return self.children[child]
         else:
             return None
 
@@ -158,20 +158,20 @@ class RadixTrie():
        self.printTrieHelper(self.root, 1)
 
         
-tree = RadixTrie()
-tree.insert("bac")
-#tree.printTrie()
-tree.insert("abc")
-#tree.printTrie()
-tree.insert("abd")
-#tree.printTrie()
-tree.insert("abdf")
-tree.insert("ab")
-tree.printTrie()
-assert(tree.lookup("abdf") == True)
-assert(tree.lookup("ab") == True)
-assert(tree.lookup("bac") == True)
-assert(tree.lookup("abc") == True)
+# tree = RadixTrie()
+# tree.insert("bac")
+# #tree.printTrie()
+# tree.insert("abc")
+# #tree.printTrie()
+# tree.insert("abd")
+# #tree.printTrie()
+# tree.insert("abdf")
+# tree.insert("ab")
+# tree.printTrie()
+# assert(tree.lookup("abdf") == True)
+# assert(tree.lookup("ab") == True)
+# assert(tree.lookup("bac") == True)
+# assert(tree.lookup("abc") == True)
 
             
 
