@@ -1,10 +1,18 @@
-from Node import *
+
+
+class TrieNode:
+    "Node representation for TrieTree"
+    def __init__(self, char):
+        
+        self.char = char
+        # key = char, value = Node
+        self.childNodes = {}
 
 class TrieTree:
     
     def __init__(self):
         
-        self.root = Node("")
+        self.root = TrieNode("")
         self.nodeCount = 1
         
     def insert(self, word):
@@ -17,7 +25,7 @@ class TrieTree:
             else:
                 # make new node
                 self.nodeCount += 1
-                insertNode = Node(c)
+                insertNode = TrieNode(c)
                 currNode.childNodes[c] = insertNode
                 currNode = insertNode
                 
