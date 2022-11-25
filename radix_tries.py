@@ -31,9 +31,11 @@ class RadixTrie():
     def __init__(self):
         self.root = Node()
         self.name = 'radix_trie'
+        self.nodeCount = 0
 
     #checks if a node's children shares a prefix with the remainig portion of the search string
     def comparePrefix(self, prefix, remStr):
+        if len(prefix) == 0 or len(remStr) == 0: return False
         return True if prefix[0] == remStr[0] else False
     
     #returns index of where the prefix and string overlap
@@ -117,6 +119,7 @@ class RadixTrie():
             #prefixes matches with entire node value, insert 
             if currPrefix == matchedPrefix:
                 if word == "":
+                    self.nodeCount -=1 #discount value
                     #print("Word is already inserted")
                     searchNode.setEnd(True) #indicated that child node is now an end to a word
                     return
@@ -146,6 +149,7 @@ class RadixTrie():
 
     def insert(self, word):
         #print(word)
+        self.nodeCount +=1
         self.insertHelper(self.root, word)
 
     def printTrieHelper(self, tmpNode, i):
@@ -161,16 +165,12 @@ class RadixTrie():
     def printTrie(self):
        self.printTrieHelper(self.root, 1)
 
-'''
+
 tree = RadixTrie()
-tree.insert("and")
-tree.insert("and")
-tree.insert("anyone")
-tree.insert("anywhere")
-#tree.printTrie()
-tree.insert("at")
-tree.printTrie()
-'''
+tree.insert('CHAPTER')
+tree.insert('I')
+tree.insert('CHAPTER')
+tree.insert('II')
 
 # tree = RadixTrie()
 # tree.insert("bac")
