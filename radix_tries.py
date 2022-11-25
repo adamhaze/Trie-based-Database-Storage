@@ -88,7 +88,6 @@ class RadixTrie():
 
         #no more word to be found
         if word == "":
-            print("Word is already inserted")
             return
 
         #node has no children so we can insert the rest of the new word
@@ -113,28 +112,32 @@ class RadixTrie():
             currPrefix = searchNode.str #prefix that was stored as a child
             matchedPrefix = word[0: self.overlap(word, currPrefix)] #portion of prefix thats the same for node value and new insert
             remStr = self.trimPrefix(word, currPrefix) #remainig string
-
             word = self.trimPrefix(currPrefix, word)
-            print(word)
 
             #prefixes matches with entire node value, insert 
             if currPrefix == matchedPrefix:
                 if word == "":
+                    #print("Word is already inserted")
                     searchNode.setEnd(True) #indicated that child node is now an end to a word
                     return
                 else:
                     self.insertHelper(searchNode, word) #insert remaining string
                     return
-
+            
             #prefix does not match and needs to be split
             else:
                 newNode = None
                 searchNode.str = matchedPrefix #matched prefix becomes the new node value
                 newNode = Node(end=searchNode.isEnd(), str=remStr) #remaining string becomes a new node
-                for prefix, node in searchNode.children.items():
-                    newNode.insertChild(node) #add to new node
-                    searchNode.pop(prefix) 
+                toPop = []
+                for prefix, childNode in searchNode.children.items():
+                    newNode.children[prefix] = childNode #add to new node
+                    toPop.append(prefix) 
 
+                #pop old prefix values form updated node
+                for popVal in toPop:
+                    searchNode.children.pop(popVal)
+                    
                 searchNode.children[newNode.str] = newNode #insert old prefixes to new node
                 searchNode.insertChild(word, isEnd=True) #insert new node
                 node.children.pop(currPrefix)
@@ -142,6 +145,7 @@ class RadixTrie():
                 node.children[matchedPrefix] = searchNode
 
     def insert(self, word):
+        #print(word)
         self.insertHelper(self.root, word)
 
     def printTrieHelper(self, tmpNode, i):
@@ -157,7 +161,17 @@ class RadixTrie():
     def printTrie(self):
        self.printTrieHelper(self.root, 1)
 
-        
+'''
+tree = RadixTrie()
+tree.insert("and")
+tree.insert("and")
+tree.insert("anyone")
+tree.insert("anywhere")
+#tree.printTrie()
+tree.insert("at")
+tree.printTrie()
+'''
+
 # tree = RadixTrie()
 # tree.insert("bac")
 # #tree.printTrie()
