@@ -6,13 +6,13 @@ figsize = 16,8
 
 def plot_num_nodes():
     basic = np.loadtxt('results/basic_trie_node_count.csv')
-    # radix = np.loadtxt('results/radix_trie_node_count.csv')
+    radix = np.loadtxt('results/radix_trie_node_count.csv')
     # fusion = np.loadtxt('results/fusion_trie_node_count.csv')
     
     x = [i for i in range(len(basic))]
     f,ax = plt.subplots(figsize=figsize)
     ax.plot(x, basic, label='basic trie', c='red')
-    # ax.plot(x, radix, label='radix trie', c='blue')
+    ax.plot(x, radix, label='radix trie', c='blue')
     # ax.plot(x, fusion, label='fusion trie', c='green')
     ax.set_xlabel('# intervals')
     ax.set_ylabel('# nodes')
@@ -24,13 +24,13 @@ def plot_num_nodes():
     
 def plot_insert_time():
     basic = np.loadtxt('results/basic_trie_insert_time.csv')
-    # radix = np.loadtxt('results/radix_trie_insert_time.csv')
+    radix = np.loadtxt('results/radix_trie_insert_time.csv')
     # fusion = np.loadtxt('results/fusion_trie_insert_time.csv')
     
     x = [i for i in range(len(basic))]
     f,ax = plt.subplots(figsize=figsize)
     ax.plot(x, basic, label='basic trie', c='red')
-    # ax.plot(x, radix, label='radix trie', c='blue')
+    ax.plot(x, radix, label='radix trie', c='blue')
     # ax.plot(x, fusion, label='fusion trie', c='green')
     ax.set_xlabel('# insert intervals')
     ax.set_ylabel('time elapsed over insert interval')
@@ -41,13 +41,13 @@ def plot_insert_time():
     
 def plot_query_time():
     basic = np.loadtxt('results/basic_trie_query_time.csv')
-    # radix = np.loadtxt('results/radix_trie_query_time.csv')
+    radix = np.loadtxt('results/radix_trie_query_time.csv')
     # fusion = np.loadtxt('results/fusion_trie_query_time.csv')
     
     x = [i for i in range(len(basic))]
     f,ax = plt.subplots(figsize=figsize)
     ax.plot(x, basic, label='basic trie', c='red')
-    # ax.plot(x, radix, label='radix trie', c='blue')
+    ax.plot(x, radix, label='radix trie', c='blue')
     # ax.plot(x, fusion, label='fusion trie', c='green')
     ax.set_xlabel('# query intervals')
     ax.set_ylabel('time elapsed over query interval')
@@ -63,6 +63,6 @@ def make_plots():
     plot_insert_time()
     plot_query_time()
     
-make_plots()
+# make_plots()
 
     

@@ -1,6 +1,7 @@
 from MetricCollector import *
 from TrieTree import *
 from radix_tries import *
+from plotting import *
 
 
 def main():
@@ -13,6 +14,8 @@ def main():
     radix_trie = RadixTrie()
     mc_radix = MetricCollector(radix_trie, input_data)
     mc_radix.execute()
+
+    make_plots()
     
     
 if __name__=="__main__":
