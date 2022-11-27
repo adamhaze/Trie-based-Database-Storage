@@ -53,7 +53,7 @@ class RadixTrie():
         return remStr[i: m]
     
     
-    def lookupHelper(self, node, str, currStr, remStr):
+    def queryHelper(self, node, str, currStr, remStr):
         searchNode = None # holds the node that needs to be searched next
         currStr += node.getValue() #add this to the found string
 
@@ -79,7 +79,7 @@ class RadixTrie():
                 return False
             
             else:
-                return self.lookupHelper(searchNode, str, currStr, remStr)
+                return self.queryHelper(searchNode, str, currStr, remStr)
 
     #check if string exists 
     def query(self, str):
@@ -146,6 +146,7 @@ class RadixTrie():
                 node.children.pop(currPrefix)
                 searchNode.setEnd(False)
                 node.children[matchedPrefix] = searchNode
+                self.nodeCount +=1
 
     def insert(self, word):
         #print(word)
@@ -166,11 +167,11 @@ class RadixTrie():
        self.printTrieHelper(self.root, 1)
 
 
-tree = RadixTrie()
-tree.insert('CHAPTER')
-tree.insert('I')
-tree.insert('CHAPTER')
-tree.insert('II')
+#tree = RadixTrie()
+#tree.insert('CHAPTER')
+#tree.insert('I')
+#tree.insert('CHAPTER')
+#tree.insert('II')
 
 # tree = RadixTrie()
 # tree.insert("bac")
