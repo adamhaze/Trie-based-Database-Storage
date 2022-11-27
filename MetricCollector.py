@@ -31,7 +31,8 @@ class MetricCollector:
             self.data = file.read()
             self.data = self.data.split('\n')
         file.close()
-        # shuffle(self.data, shuffle_seed)
+        shuffle(self.data)
+        # print(self.data[0:20])
         # print(len(self.data))
         
     def log_node_count(self):
