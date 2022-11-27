@@ -83,7 +83,7 @@ class RadixTrie():
 
     #check if string exists 
     def query(self, str):
-        return self.lookupHelper(self.root, str, "", str)
+        return self.queryHelper(self.root, str, "", str)
     
     def insertHelper(self, node, word):
         searchNode = None #node that we need to recurse to
