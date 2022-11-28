@@ -1,3 +1,5 @@
+import ipaddress
+
 class Node():
     def __init__(self, end=False, str=""):
         self.str = str #value stored in the node
@@ -32,6 +34,10 @@ class RadixTrie():
         self.root = Node()
         self.name = 'radix_trie'
         self.nodeCount = 0
+
+     #convert ip address to binary representation
+    def ip2bin(self, addr):
+        return bin(int(addr.network_address)) #convert to bits
 
     #checks if a node's children shares a prefix with the remainig portion of the search string
     def comparePrefix(self, prefix, remStr):
@@ -83,6 +89,13 @@ class RadixTrie():
 
     #check if string exists 
     def query(self, str):
+        if str.__contains__("."):
+            arr = str.split(",")
+            str = self.ip2bin(ipaddress.ip_network(arr[1]))
+            str = str[2:len(str)]
+            res = "0b" + self.queryIPHelper(self.root,str, "",str)
+            return ipaddress.ip_network(int(res, 2))
+
         return self.queryHelper(self.root, str, "", str)
     
     def insertHelper(self, node, word):
@@ -148,8 +161,45 @@ class RadixTrie():
                 node.children[matchedPrefix] = searchNode
                 self.nodeCount +=1
 
+
+    def queryIPHelper(self, node, str, currStr, remStr):
+        searchNode = None # holds the node that needs to be searched next
+        currStr += node.getValue() #add this to the found string
+
+        #string exists inside the trie
+        if node.isEnd() and str == currStr:
+            return currStr
+
+        #if no children, string will not be in the tree
+        elif len(node.children) == 0 or remStr == "":
+            #for i in range(len(remStr)): currStr += "0"
+            return currStr
+        
+        #keep exploring the tree
+        else:
+            #loop over all the children nodes
+            for prefix, childNode in node.children.items():
+                if self.comparePrefix(prefix, remStr):
+                    searchNode = childNode
+                    remStr = self.trimPrefix(prefix, remStr)
+                    break 
+
+            #prefix match not found
+            if searchNode is None:
+                print("in")
+                for i in range(len(remStr)): currStr += "0"
+                return currStr
+            
+            else:
+                return self.queryIPHelper(searchNode, str, currStr, remStr)
+        
+
     def insert(self, word):
-        #print(word)
+        if word.__contains__("."):
+            arr = word.split(",")
+            word = self.ip2bin(ipaddress.ip_network(arr[1]))
+            word = word[2:len(word)]
+
         self.nodeCount +=1
         self.insertHelper(self.root, word)
 
@@ -173,6 +223,10 @@ class RadixTrie():
 #tree.insert('CHAPTER')
 #tree.insert('II')
 
+#tree = RadixTrie()
+#tree.insert("01111001.01000010.10111101.11110010,121.66.189.242")
+#tree.printTrie()
+#print(tree.query("01111001.01000010.10111101.11110010,121.0.0.0"))
 # tree = RadixTrie()
 # tree.insert("bac")
 # #tree.printTrie()
