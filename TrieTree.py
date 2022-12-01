@@ -55,7 +55,7 @@ class TrieTree:
                     break
         
             
-        print(longestMatch)
+        # print(longestMatch)
         return ipaddress.ip_network(int(longestMatch, 2))
         
                 
@@ -70,12 +70,13 @@ class TrieTree:
             else:
                 # word not found
                 print("{} was NOT found in the Trie Tree".format(word))
+        # return queryArr
 
 
     def query(self, word):
         if word.__contains__("."):
             arr = word.split(",")
-            print(arr)
+            # print(arr)
             addr = arr[1]
             return self.queryIPHelper(self.root, ipaddress.ip_network(addr))
         
